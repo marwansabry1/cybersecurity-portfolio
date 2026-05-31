@@ -1,7 +1,5 @@
 # File Transfers
 
-MAIN: python3 -m http.server [port]
-
 Main idea:
 
 - Need file onto victim? -> download
