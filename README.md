@@ -1,4 +1,4 @@
-# cpts-notes
+# Certified Penetration Testing Specialist (CPTS) Notes
 Notes, methodology, cheat sheets, and lab writeups from my CPTS preparation journey.
 
 It is designed for:
