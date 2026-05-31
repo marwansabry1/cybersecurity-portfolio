@@ -1,3 +1,4 @@
+# Shells and Payloads
 ## Core Mental Model
 
 Before choosing any shell or payload, classify the situation:
