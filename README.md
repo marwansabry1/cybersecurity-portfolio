@@ -23,6 +23,7 @@ Small scripts written to automate patterns I kept repeating manually. See [`scri
 | `creds_from_config.sh` | Extract user/pass pairs from config files |
 | `dns_enum_zonetransfer.sh` | Enumerate nameservers and attempt zone transfers |
 | `smtp_enumeration.py` | SMTP user enumeration via `VRFY` |
+| `port_scanner.py` | Single-threaded TCP connect scan (1–1024) |
 
 ## About
 

@@ -10,6 +10,8 @@ Small utilities I built while working through labs and CTF-style machines. Each 
 
 **What it does:** Parses a config file for `user=`/`pass=` (or `User:`/`Pass:`) style key-value pairs, normalizes casing and whitespace, and pairs each username with the password that follows it — printing matches as `user:pass`.
 
+**Why I built it:** Came out of the [Archetype](../writeups/htb-archetype.md) box, where MSSQL service-account credentials were sitting in plaintext inside a config file on an unauthenticated SMB share. Manually grepping for `user=`/`pass=` got old fast, so I automated the pattern-matching and pairing logic.
+
 **Usage:**
 ```bash
 ./creds_from_config.sh <config_file>
@@ -71,12 +73,39 @@ python3 smtp_enumeration.py 10.129.14.20 users.txt
 
 ---
 
+## `port_scanner.py`
+
+**What it does:** A single-threaded TCP connect scan against ports 1–1024 of a given IP. Attempts a full `connect()` on each port with a 1-second timeout and prints any that respond as open.
+
+**Why I built it:** Wanted to understand what a tool like Nmap is actually doing under the hood at the socket level, rather than only using it as a black box. Not intended to replace Nmap or similar scanners — it's a learning exercise, not a production tool.
+
+**Usage:**
+```bash
+python3 port_scanner.py
+# then enter an IP address when prompted
+```
+
+**Example:**
+```
+Enter IP address to scan: 10.129.14.20
+Loading....
+[+] Port 22 is open
+[+] Port 80 is open
+[+] Port 445 is open
+Scan complete.
+```
+
+**Notes / limitations:** Prompts interactively for the target rather than taking a CLI argument (unlike the other scripts here) — on the list to change to `argparse` for consistency. Scans sequentially, so it's slow (~1024 seconds worst case at the default 1s timeout); threading is the planned next step. This is a TCP connect scan, not a SYN scan, so it's easily logged by the target and shouldn't be mistaken for a stealthy technique.
+
+---
+
 ## Requirements
 
 - **`creds_from_config.sh`, `dns_enum_zonetransfer.sh`:** Bash, standard GNU utilities (`awk`, `grep`, `tr`, `host`, `cut`). Tested on Kali Linux.
 - **`smtp_enumeration.py`:** Python 3, standard library only (`socket`, `sys`) — no external dependencies.
+- **`port_scanner.py`:** Python 3, standard library (`socket`, `sys`) plus the `pyfiglet` package (`pip install pyfiglet`).
 
 ## Notes
 
-- None of these currently have a `-h`/`--help` flag — running with the wrong number of arguments prints a usage message and exits.
+- None of these currently have a `-h`/`--help` flag — running with the wrong number of arguments (or, for `port_scanner.py`, at the interactive prompt) prints a usage message and exits.
 - Written for clarity and learning first, performance second. Happy to take suggestions/PRs for improvements — known limitations for each script are noted above rather than hidden.
