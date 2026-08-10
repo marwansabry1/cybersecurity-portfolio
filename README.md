@@ -8,7 +8,7 @@ Notes, writeups, and tooling from my CPTS preparation journey — documenting me
 
 | Box | OS | Difficulty | Key Skills |
 |---|---|---|---|
-| [Archetype](writeups/htb-archetype.md) | Windows | Easy | SMB enum, MSSQL abuse, `xp_cmdshell`, credential reuse |
+| [Archetype](writeups/htb-archetype.md) | Windows | Easy | SMB enum, MSSQL abuse, `xp_cmdshell` |
 
 ## Notes
 
